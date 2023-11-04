@@ -21,12 +21,13 @@ export const authOptions: any = {
   providers: [
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID as string,
-      clientSecret: process.env.SECRET as string,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
       authorization: {
         params: { scope: "identify email guilds guilds.members.read" },
       },
     }),
   ],
+  secret: process.env.SECRET,
   callbacks: {
     /**
      * sessionにaccessTokenと、user.idを追加
