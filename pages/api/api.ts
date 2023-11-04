@@ -103,7 +103,7 @@ export async function getGuildEvents() {
 }
 
 export async function getMessageCountByUserId(userId: string, hours: number) {
-  const url: string = `${process.env.URL}message/count?guild_id=836979436623626291&user_id=${userId}&hours=${hours}`;
+  const url: string = `${process.env.URL}message/count?guild_id=${process.env.OTOGAME_ID}&user_id=${userId}&hours=${hours}`;
   const base64Credentials = btoa(
     `${process.env.API_USERNAME}:${process.env.API_PASSWORD}`
   );
