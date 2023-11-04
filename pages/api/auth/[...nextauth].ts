@@ -21,7 +21,7 @@ export const authOptions: any = {
   providers: [
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID as string,
-      clientSecret: process.env.NEXT_PUBLIC_SECRET as string,
+      clientSecret: process.env.SECRET as string,
       authorization: {
         params: { scope: "identify email guilds guilds.members.read" },
       },
