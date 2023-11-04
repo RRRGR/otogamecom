@@ -1,4 +1,4 @@
-import { getEmojiUsageRank } from "@/api/api";
+import { getEmojiUsageRank } from "@/pages/api/api";
 import {
   Card,
   Table,

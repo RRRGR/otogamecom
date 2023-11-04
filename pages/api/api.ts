@@ -4,9 +4,9 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export async function getEmojiUsageRank() {
-  const url: string = `${process.env.NEXT_PUBLIC_URL}emoji/usage-rank?guild_id=${process.env.NEXT_PUBLIC_OTOGAME_ID}`;
+  const url: string = `${process.env.URL}emoji/usage-rank?guild_id=${process.env.OTOGAME_ID}`;
   const base64Credentials = btoa(
-    `${process.env.NEXT_PUBLIC_API_USERNAME}:${process.env.NEXT_PUBLIC_API_PASSWORD}`
+    `${process.env.API_USERNAME}:${process.env.API_PASSWORD}`
   );
   const headers = new Headers({
     Authorization: `Basic ${base64Credentials}`,
@@ -22,9 +22,9 @@ export async function getEmojiUsageRank() {
 }
 
 export async function getGuildMembers() {
-  const url: string = `https://discordapp.com/api/guilds/${process.env.NEXT_PUBLIC_OTOGAME_ID}/members?limit=1000`;
+  const url: string = `https://discordapp.com/api/guilds/${process.env.OTOGAME_ID}/members?limit=1000`;
   const headers = new Headers({
-    Authorization: `Bot ${process.env.NEXT_PUBLIC_DISCORD_TOKEN}`,
+    Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
   });
   const fetchOptions: RequestInit = {
     method: "GET",
@@ -36,9 +36,9 @@ export async function getGuildMembers() {
 }
 
 export async function getUser(userId: string) {
-  const url: string = `https://discordapp.com/api/guilds/${process.env.NEXT_PUBLIC_OTOGAME_ID}/members/${userId}`;
+  const url: string = `https://discordapp.com/api/guilds/${process.env.OTOGAME_ID}/members/${userId}`;
   const headers = new Headers({
-    Authorization: `Bot ${process.env.NEXT_PUBLIC_DISCORD_TOKEN}`,
+    Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
   });
   const fetchOptions: RequestInit = {
     method: "GET",
@@ -50,9 +50,9 @@ export async function getUser(userId: string) {
 }
 
 export async function getGuildRoles() {
-  const url: string = `https://discordapp.com/api/guilds/${process.env.NEXT_PUBLIC_OTOGAME_ID}/roles`;
+  const url: string = `https://discordapp.com/api/guilds/${process.env.OTOGAME_ID}/roles`;
   const headers = new Headers({
-    Authorization: `Bot ${process.env.NEXT_PUBLIC_DISCORD_TOKEN}`,
+    Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
   });
   const fetchOptions: RequestInit = {
     method: "GET",
@@ -64,9 +64,9 @@ export async function getGuildRoles() {
 }
 
 export async function getMemberFriendCodeById(userId: string) {
-  const url: string = `${process.env.NEXT_PUBLIC_URL}friend-code?user_id=${userId}`;
+  const url: string = `${process.env.URL}friend-code?user_id=${userId}`;
   const base64Credentials = btoa(
-    `${process.env.NEXT_PUBLIC_API_USERNAME}:${process.env.NEXT_PUBLIC_API_PASSWORD}`
+    `${process.env.API_USERNAME}:${process.env.API_PASSWORD}`
   );
   const headers = new Headers({
     Authorization: `Basic ${base64Credentials}`,
@@ -82,16 +82,16 @@ export async function getMemberFriendCodeById(userId: string) {
 }
 
 export async function getOnlineMembers() {
-  const url: string = `https://discordapp.com/api/invites/${process.env.NEXT_PUBLIC_INVITE}?with_counts=true&with_expiration=true`;
+  const url: string = `https://discordapp.com/api/invites/${process.env.INVITE}?with_counts=true&with_expiration=true`;
   const res: Response = await fetch(url);
   const data = await res.json();
   return data;
 }
 
 export async function getGuildEvents() {
-  const url: string = `https://discordapp.com/api/guilds/${process.env.NEXT_PUBLIC_OTOGAME_ID}/scheduled-events`;
+  const url: string = `https://discordapp.com/api/guilds/${process.env.OTOGAME_ID}/scheduled-events`;
   const headers = new Headers({
-    Authorization: `Bot ${process.env.NEXT_PUBLIC_DISCORD_TOKEN}`,
+    Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
   });
   const fetchOptions: RequestInit = {
     method: "GET",
@@ -103,9 +103,9 @@ export async function getGuildEvents() {
 }
 
 export async function getMessageCountByUserId(userId: string, hours: number) {
-  const url: string = `${process.env.NEXT_PUBLIC_URL}message/count?guild_id=836979436623626291&user_id=${userId}&hours=${hours}`;
+  const url: string = `${process.env.URL}message/count?guild_id=836979436623626291&user_id=${userId}&hours=${hours}`;
   const base64Credentials = btoa(
-    `${process.env.NEXT_PUBLIC_API_USERNAME}:${process.env.NEXT_PUBLIC_API_PASSWORD}`
+    `${process.env.API_USERNAME}:${process.env.API_PASSWORD}`
   );
   const headers = new Headers({
     Authorization: `Basic ${base64Credentials}`,

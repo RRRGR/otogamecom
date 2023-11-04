@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Header } from "@/components/header";
 import { Card, Grid, Text, Title } from "@tremor/react";
-import { getGuildEvents, getOnlineMembers } from "@/api/api";
+import { getGuildEvents, getOnlineMembers } from "@/pages/api/api";
 import Link from "next/link";
 import { Footer } from "@/components/footer";
 

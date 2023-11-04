@@ -3,7 +3,7 @@ import {
   getMemberFriendCodeById,
   getMessageCountByUserId,
   getUser,
-} from "@/api/api";
+} from "@/pages/api/api";
 import Layout from "@/components/layout";
 import { useLocale } from "@/hooks/useLocale";
 import {
