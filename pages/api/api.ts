@@ -1,7 +1,4 @@
 import { emojiUsageRankArray } from "@/types";
-import { getSession, useSession } from "next-auth/react";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export async function getEmojiUsageRank() {
   const url: string = `${process.env.URL}emoji/usage-rank?guild_id=${process.env.OTOGAME_ID}`;
@@ -84,6 +81,7 @@ export async function getMemberFriendCodeById(userId: string) {
 export async function getOnlineMembers() {
   const url: string = `https://discordapp.com/api/invites/${process.env.INVITE}?with_counts=true&with_expiration=true`;
   const res: Response = await fetch(url);
+  if (res.status == 429) return {};
   const data = await res.json();
   return data;
 }
@@ -98,8 +96,8 @@ export async function getGuildEvents() {
     headers,
   };
   const res: Response = await fetch(url, fetchOptions);
-  const roles = await res.json();
-  return roles;
+  const data = await res.json();
+  return data;
 }
 
 export async function getMessageCountByUserId(userId: string, hours: number) {

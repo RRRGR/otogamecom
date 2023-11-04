@@ -19,34 +19,39 @@ export default function Home({ online, guildEvents }: any) {
           𝓦𝓮𝓵𝓬𝓸𝓶𝓮 𝓽𝓸 𝓽𝓱𝓮 𝓞𝓾𝓬𝓱𝓲 𝓞𝓽𝓸𝓰𝓪𝓶𝓮 𝓢𝓮𝓻𝓿𝓮𝓻 𝓞𝓯𝓯𝓲𝓬𝓲𝓪𝓵 𝓦𝓮𝓫𝓼𝓲𝓽𝓮!
         </div>
         <div className="text-center text-[20px] mt-10">{`Upcoming Events:${
-          guildEvents.length > 0 ? "" : " None"
+          guildEvents.message !== undefined
+            ? " Failed to get events."
+            : guildEvents.length > 0
+            ? ""
+            : " None"
         }`}</div>
         <Grid numItems={1} className="">
-          {guildEvents.map((guildEvent: any) => {
-            const startsAtDate: Date = new Date(
-              guildEvent.scheduled_start_time
-            );
-            startsAtDate.setHours(startsAtDate.getHours() + 9);
-            const startsAtString: string = `${startsAtDate.getFullYear()}/${startsAtDate.getMonth()}/${startsAtDate.getDate()} ${startsAtDate
-              .getHours()
-              .toString()
-              .padStart(2, "0")}:${startsAtDate
-              .getMinutes()
-              .toString()
-              .padStart(2, "0")}`;
-            return (
-              <Card
-                key={guildEvent.name}
-                className="max-w-xs mx-auto mt-4"
-                decoration="top"
-                decorationColor="indigo"
-              >
-                <Title>{guildEvent.name}</Title>
-                <Text>{startsAtString}</Text>
-                <Text>{guildEvent.description}</Text>
-              </Card>
-            );
-          })}
+          {!guildEvents.message &&
+            guildEvents.map((guildEvent: any) => {
+              const startsAtDate: Date = new Date(
+                guildEvent.scheduled_start_time
+              );
+              startsAtDate.setHours(startsAtDate.getHours() + 9);
+              const startsAtString: string = `${startsAtDate.getFullYear()}/${startsAtDate.getMonth()}/${startsAtDate.getDate()} ${startsAtDate
+                .getHours()
+                .toString()
+                .padStart(2, "0")}:${startsAtDate
+                .getMinutes()
+                .toString()
+                .padStart(2, "0")}`;
+              return (
+                <Card
+                  key={guildEvent.name}
+                  className="max-w-xs mx-auto mt-4"
+                  decoration="top"
+                  decorationColor="indigo"
+                >
+                  <Title>{guildEvent.name}</Title>
+                  <Text>{startsAtString}</Text>
+                  <Text>{guildEvent.description}</Text>
+                </Card>
+              );
+            })}
         </Grid>
         <Card className="max-w-md mx-auto max-h-none bg-gray-700 mt-8">
           <Image
@@ -62,11 +67,15 @@ export default function Home({ online, guildEvents }: any) {
           <Grid numItems={2} className="mt-8 flex justify-center">
             <div className="w-32 h-7 rounded-full bg-gray-800 mr-3 flex justify-center">
               <div className="w-3 h-3 rounded-full mt-2 bg-green-500"></div>
-              <p className="text-white text-sm mt-1 ml-1">{`${online.approximate_presence_count} Online`}</p>
+              <p className="text-white text-sm mt-1 ml-1">{`${
+                online.approximate_presence_count ?? "?"
+              } Online`}</p>
             </div>
             <div className="w-32 h-7 rounded-full bg-gray-800 ml-3 flex justify-center">
               <div className="w-3 h-3 rounded-full mt-2 bg-gray-400"></div>
-              <p className="text-white text-sm mt-1 ml-1">{`${online.approximate_member_count} Members`}</p>
+              <p className="text-white text-sm mt-1 ml-1">{`${
+                online.approximate_member_count ?? "?"
+              } Members`}</p>
             </div>
           </Grid>
 
