@@ -13,6 +13,14 @@ const nextConfig = {
     locales: ["ja", "en"],
     defaultLocale: "ja",
   },
+  async rewrites() {
+    return [
+      {
+        source: process.env.SOURCEPATH,
+        destination: process.env.DESTINATIONPATH,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
