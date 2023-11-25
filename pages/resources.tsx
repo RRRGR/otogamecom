@@ -119,6 +119,17 @@ function Resources() {
   return (
     <div className="flex flex-col min-h-screen">
       <Grid numItemsSm={1} numItemsMd={2} numItemsLg={3} className="">
+        <Card
+          className="max-w-xs mx-auto mt-4"
+          decoration="top"
+          decorationColor="indigo"
+        >
+          <Text>Advent Calendar</Text>
+          <Metric>
+            <Link href="advent">Advent Calendar</Link>
+            <Icon icon={ArrowTopRightOnSquareIcon}></Icon>
+          </Metric>
+        </Card>
         {projects.map((project) => {
           return (
             <Card

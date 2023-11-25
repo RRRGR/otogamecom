@@ -117,3 +117,104 @@ export async function getMessageCountByUserId(userId: string, hours: number) {
   const data = await res.json();
   return data;
 }
+
+export async function getAdventByIdAndDate(userId: string, date: string) {
+  const url: string = `${process.env.URL}advent/event?user_id=${userId}&date_str=${date}`;
+  const base64Credentials = btoa(
+    `${process.env.API_USERNAME}:${process.env.API_PASSWORD}`
+  );
+  const headers = new Headers({
+    Authorization: `Basic ${base64Credentials}`,
+    "Content-Type": "application/json",
+  });
+  const fetchOptions: RequestInit = {
+    method: "GET",
+    headers,
+  };
+  const res = await fetch(url, fetchOptions);
+  const data = await res.json();
+  return data;
+}
+
+export async function getAdventByYear(year: number) {
+  const url: string = `${process.env.URL}advent/events?year=${year}`;
+  const base64Credentials = btoa(
+    `${process.env.API_USERNAME}:${process.env.API_PASSWORD}`
+  );
+  const headers = new Headers({
+    Authorization: `Basic ${base64Credentials}`,
+    "Content-Type": "application/json",
+  });
+  const fetchOptions: RequestInit = {
+    method: "GET",
+    headers,
+  };
+  const res = await fetch(url, fetchOptions);
+  const data = await res.json();
+  return data;
+}
+
+export async function upsertAdvent(
+  userId: number,
+  author: string,
+  title: string,
+  url: string,
+  date: string
+): Promise<any> {
+  const fetchUrl: string = `${process.env.NEXT_PUBLIC_URL}advent/event`;
+  const base64Credentials = btoa(
+    `${process.env.API_USERNAME}:${process.env.API_PASSWORD}`
+  );
+  const data = {
+    user_id: userId,
+    author: author,
+    title: title,
+    url: url,
+    date_str: date,
+  };
+  const requestOptions: RequestInit = {
+    method: "PUT",
+    headers: {
+      Authorization: `Basic ${base64Credentials}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+  const response = await fetch(fetchUrl, requestOptions);
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  const responseData = await response.json();
+  return responseData;
+}
+
+export async function deleteAdvent(userId: number, date: string): Promise<any> {
+  const url: string = `${process.env.NEXT_PUBLIC_URL}advent/event`;
+  const base64Credentials = btoa(
+    `${process.env.API_USERNAME}:${process.env.API_PASSWORD}`
+  );
+  const data = {
+    user_id: userId,
+    date_str: date,
+    author: null,
+    title: null,
+    url: null,
+  };
+  const requestOptions: RequestInit = {
+    method: "DELETE",
+    headers: {
+      Authorization: `Basic ${base64Credentials}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+  const response = await fetch(url, requestOptions);
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  const responseData = await response.json();
+  return responseData;
+}
