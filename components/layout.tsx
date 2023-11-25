@@ -1,15 +1,18 @@
 import { Header } from "./header";
 import { Footer } from "./footer";
 import { ReactNode } from "react";
+import Head from "next/head";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
+      <Head>
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
+      </Head>
       <Header />
-      <meta
-        http-equiv="Content-Security-Policy"
-        content="upgrade-insecure-requests"
-      />
       <main>{children}</main>
       <Footer />
     </>
