@@ -1,5 +1,6 @@
 import { useLocale } from "@/hooks/useLocale";
 import { Grid } from "@tremor/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 export function Footer() {
@@ -33,6 +34,12 @@ export function Footer() {
         <div className="mt-3 text-xs">
           &copy; {new Date().getFullYear()} GrGuruto. All rights reserved.
         </div>
+        <Link
+          className="mt-2 text-xs underline"
+          href="https://www.amazon.jp/hz/wishlist/ls/1G01ULPM8C79F?ref_=wl_share"
+        >
+          Support
+        </Link>
       </Grid>
     </footer>
   );
