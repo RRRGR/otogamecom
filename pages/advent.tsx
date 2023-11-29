@@ -39,6 +39,7 @@ function Advent({
   const [isUrl, setIsUrl] = useState<boolean>(true);
 
   const handleDateClick = (info: any) => {
+    if (!userSession) return;
     setIsOpen(true);
     setSelectedDate(info.dateStr);
   };
@@ -219,14 +220,6 @@ function Advent({
 
 export async function getServerSideProps(context: GetSessionParams) {
   const userSession: Session | null = await getSession(context);
-  if (!userSession) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
   const adventEvents = await getAdventByYear(2023);
   let adventEventsArray = [];
   for (const event of adventEvents.events) {

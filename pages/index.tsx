@@ -100,6 +100,9 @@ export default function Home({ online, guildEvents }: any) {
           Discord Sign In
         </button>
       </div>
+      <p className="flex justify-center mt-4 text-gray-500">
+        Some pages are not accessible to people not in the server.
+      </p>
     </>
   );
 }
