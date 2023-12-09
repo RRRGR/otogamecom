@@ -31,8 +31,9 @@ export default function Home({ online, guildEvents }: any) {
               const startsAtDate: Date = new Date(
                 guildEvent.scheduled_start_time
               );
-              startsAtDate.setHours(startsAtDate.getHours() + 9);
-              const startsAtString: string = `${startsAtDate.getFullYear()}/${startsAtDate.getMonth()}/${startsAtDate.getDate()} ${startsAtDate
+              const startsAtString: string = `${startsAtDate.getFullYear()}/${
+                startsAtDate.getMonth() + 1
+              }/${startsAtDate.getDate()} ${startsAtDate
                 .getHours()
                 .toString()
                 .padStart(2, "0")}:${startsAtDate
