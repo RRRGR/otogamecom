@@ -20,7 +20,7 @@ import {
   Title,
 } from "@tremor/react";
 import { Session } from "next-auth";
-import { deleteAdvent, getAdventByYear, upsertAdvent } from "./api/api";
+import { deleteAdvent, getAdventByYear, upsertAdvent } from "../api/api";
 import Link from "next/link";
 
 function Advent({
@@ -31,7 +31,7 @@ function Advent({
   adventEventsArray: any;
 }) {
   const [events, setEvents] = useState<any>(adventEventsArray);
-  const [selectedDate, setSelectedDate] = useState("2023-12-01");
+  const [selectedDate, setSelectedDate] = useState("2024-12-01");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const closeModal = () => setIsOpen(false);
   const [titleInput, setTitleInput] = useState("");
@@ -168,8 +168,8 @@ function Advent({
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           validRange={{
-            start: "2023-12-01",
-            end: "2023-12-26",
+            start: "2024-12-01",
+            end: "2024-12-26",
           }}
           headerToolbar={{
             left: "",
@@ -220,7 +220,7 @@ function Advent({
 
 export async function getServerSideProps(context: GetSessionParams) {
   const userSession: Session | null = await getSession(context);
-  const adventEvents = await getAdventByYear(2023);
+  const adventEvents = await getAdventByYear(2024);
   let adventEventsArray = [];
   for (const event of adventEvents.events) {
     const transformedEvent = {
