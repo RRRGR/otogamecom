@@ -81,6 +81,13 @@ function Advent({
     setIsOpen(false);
   };
 
+  const handleEventClick = (info: any) => {
+    info.jsEvent.preventDefault();
+    if (info.event.url) {
+      window.open(info.event.url, "_blank");
+    }
+  };
+
   return (
     <div className="m-4">
       <Transition appear show={isOpen} as={Fragment}>
@@ -179,6 +186,7 @@ function Advent({
           editable={true}
           dateClick={handleDateClick}
           events={events}
+          eventClick={handleEventClick}
         />
       </div>
       <Table className="mt-5">
@@ -203,12 +211,13 @@ function Advent({
                 <Text className="truncate">{e.originTitle}</Text>
               </TableCell>
               <TableCell>
-                <Link
+                <a
                   href={e.url}
                   className="truncate text-blue-500 underline hover:text-blue-300"
+                  target="_blank"
                 >
                   {e.url}
-                </Link>
+                </a>
               </TableCell>
             </TableRow>
           ))}
